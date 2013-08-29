@@ -1,0 +1,8 @@
+.classpath
+.mtj
+.mtj.tmp/
+.project
+.settings
+Application Descriptor
+bin/
+build.properties
