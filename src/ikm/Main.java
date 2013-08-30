@@ -7,6 +7,7 @@ import ikm.data.Animal;
 import ikm.db.Base;
 import ikm.views.AnimalList;
 
+import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.midlet.MIDlet;
 
@@ -30,7 +31,7 @@ public class Main
     private Base animalBase;
     private Base documentBase;
     private Base weaponBase;
-
+    public static Display display;
     private void loadBase() {
     	try {
     		animalBase = new Base(new InputStreamReader(Main.class.getResourceAsStream("/animal.csv"), "utf-8"));
@@ -53,8 +54,8 @@ public class Main
      * @see javax.microedition.midlet.MIDlet#startApp()
      */
     public void startApp() {
+    	display = Display.getDisplay(this);
     	loadBase();
-    	
         tabManager = new TabManager(this);
         
         Displayable view1 = new AnimalList(tabManager, animalBase, new String[] 
