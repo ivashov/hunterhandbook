@@ -5,13 +5,18 @@ import ikm.data.Animal;
 
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
+import javax.microedition.lcdui.CustomItem;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Form;
+import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.Item;
+import javax.microedition.lcdui.ItemCommandListener;
 import javax.microedition.lcdui.StringItem;
 
-public class AnimalDetail extends Form implements CommandListener {
+public class AnimalDetail extends Form implements CommandListener {	
 	private ViewManager viewManager;
 	private Command exitCommand = new Command("Back", Command.BACK, 1);
+	private Command testCommand = new Command("Test", Command.ITEM, 1);
 	private String[] line;
 	private String[] fieldNames;
 	
@@ -30,6 +35,7 @@ public class AnimalDetail extends Form implements CommandListener {
 
 	private void addText(String caption, String data) {
 		StringItem item = new StringItem(caption, data);
+	
 		append(item);
 	}
 	

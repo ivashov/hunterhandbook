@@ -5,8 +5,6 @@ import java.io.UnsupportedEncodingException;
 
 import ikm.data.Animal;
 import ikm.db.Base;
-import ikm.example.CanvasBasedExampleView;
-import ikm.example.FormBasedExampleView;
 import ikm.views.AnimalList;
 
 import javax.microedition.lcdui.Displayable;
