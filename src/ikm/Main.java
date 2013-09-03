@@ -11,6 +11,9 @@ import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.midlet.MIDlet;
 
+import com.nokia.maps.common.GeoCoordinate;
+import com.nokia.maps.map.MapCanvas;
+import com.nokia.maps.map.MapDisplayState;
 import com.nokia.mid.ui.orientation.Orientation;
 import com.nokia.mid.ui.orientation.OrientationListener;
 
@@ -27,6 +30,8 @@ public class Main
 
     // Class members
 
+	public static final String HERE_ID = "aISaf4OOdEYcioK0pEJs";
+	public static final String HERE_TOKEN = "sLOZJSIl6hfCid2LZ_BAug";
     private TabManager tabManager;
     private Base animalBase;
     private Base documentBase;
@@ -54,6 +59,9 @@ public class Main
      * @see javax.microedition.midlet.MIDlet#startApp()
      */
     public void startApp() {
+    	com.nokia.maps.common.ApplicationContext.getInstance().setAppID(HERE_ID);
+    	com.nokia.maps.common.ApplicationContext.getInstance().setToken(HERE_TOKEN);
+    	
     	display = Display.getDisplay(this);
     	loadBase();
         tabManager = new TabManager(this);
@@ -64,13 +72,23 @@ public class Main
         		{"Название", ""});
         Displayable view3 = new ArticleList("Оружие", tabManager, weaponBase, new String[] 
         		{"Название", "Тип", "Калибр", "Дальность", "Описание"});
-
+        MapCanvas mapp = new MapCanvas(display) {
+			public void onMapUpdateError(String arg0, Throwable arg1, boolean arg2) {
+			}
+			
+			public void onMapContentComplete() {
+			}
+		};
+        mapp.getMapDisplay().setState(new MapDisplayState(
+        		new GeoCoordinate(61.78, 34.35, 0), 10));
+		mapp.setTitle("HERE maps");
         Orientation.addOrientationListener(this);
 
         tabManager.addTab(view1, "/categorybar_comments.png",
             "Custom command label");
         tabManager.addTab(view2, "/categorybar_contacts.png");
         tabManager.addTab(view3, "/categorybar_image.png");
+        tabManager.addTab(mapp, "/categorybar_image.png");
         tabManager.showTab(0); // 0 == first tab
     }
 
