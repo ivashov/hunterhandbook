@@ -6,7 +6,10 @@ import java.io.UnsupportedEncodingException;
 import ikm.data.Animal;
 import ikm.db.Base;
 import ikm.views.ArticleList;
+import ikm.views.MapView;
+import ikm.views.ShopList;
 
+import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.midlet.MIDlet;
@@ -14,6 +17,8 @@ import javax.microedition.midlet.MIDlet;
 import com.nokia.maps.common.GeoCoordinate;
 import com.nokia.maps.map.MapCanvas;
 import com.nokia.maps.map.MapDisplayState;
+import com.nokia.maps.map.MapMarker;
+import com.nokia.maps.map.MapStandardMarker;
 import com.nokia.mid.ui.orientation.Orientation;
 import com.nokia.mid.ui.orientation.OrientationListener;
 
@@ -36,15 +41,37 @@ public class Main
     private Base animalBase;
     private Base documentBase;
     private Base weaponBase;
+    private Base shopBase;
     public static Display display;
+    
+    private volatile MapView mapView;
+    public MapView getMapView() {
+    	if (mapView == null) {
+    		synchronized (this) {
+				if (mapView == null) {
+					mapView = new MapView(Display.getDisplay(this), tabManager, shopBase);
+				}
+			}
+    	}
+    	
+    	return mapView;
+    }
+    
     private void loadBase() {
     	try {
-    		animalBase = new Base(new InputStreamReader(Main.class.getResourceAsStream("/animal.csv"), "utf-8"));
+    		InputStreamReader reader;
+    		animalBase = new Base(reader = new InputStreamReader(Main.class.getResourceAsStream("/animal.csv"), "utf-8"));
     		animalBase.parseAll();
-    		documentBase = new Base(new InputStreamReader(Main.class.getResourceAsStream("/document.csv"), "utf-8"));
+    		reader.close();
+    		documentBase = new Base(reader = new InputStreamReader(Main.class.getResourceAsStream("/document.csv"), "utf-8"));
     		documentBase.parseAll();
-    		weaponBase = new Base(new InputStreamReader(Main.class.getResourceAsStream("/weapon.csv"), "utf-8"));
+    		reader.close();
+    		weaponBase = new Base(reader = new InputStreamReader(Main.class.getResourceAsStream("/weapon.csv"), "utf-8"));
     		weaponBase.parseAll();
+    		reader.close();
+    		shopBase = new Base(reader = new InputStreamReader(Main.class.getResourceAsStream("/shops.csv"), "utf-8"));
+    		shopBase.parseAll();
+    		reader.close();
     	} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -72,23 +99,31 @@ public class Main
         		{"Название", ""});
         Displayable view3 = new ArticleList("Оружие", tabManager, weaponBase, new String[] 
         		{"Название", "Тип", "Калибр", "Дальность", "Описание"});
+        Displayable view4 = new ShopList(tabManager, shopBase, this);
+        /*
         MapCanvas mapp = new MapCanvas(display) {
 			public void onMapUpdateError(String arg0, Throwable arg1, boolean arg2) {
 			}
-			
+
 			public void onMapContentComplete() {
 			}
 		};
         mapp.getMapDisplay().setState(new MapDisplayState(
         		new GeoCoordinate(61.78, 34.35, 0), 10));
 		mapp.setTitle("HERE maps");
+		MapStandardMarker mar = mapp.getMapFactory().createStandardMarker(
+				new GeoCoordinate(61.78, 34.35, 0));
+		mapp.getMapDisplay().addMapObject(mar);
+		*/
+		
+		
         Orientation.addOrientationListener(this);
 
         tabManager.addTab(view1, "/categorybar_comments.png",
             "Custom command label");
         tabManager.addTab(view2, "/categorybar_contacts.png");
         tabManager.addTab(view3, "/categorybar_image.png");
-        tabManager.addTab(mapp, "/categorybar_image.png");
+        tabManager.addTab(view4, "/categorybar_image.png");
         tabManager.showTab(0); // 0 == first tab
     }
 

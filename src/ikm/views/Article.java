@@ -19,7 +19,7 @@ import javax.microedition.lcdui.Item;
 import javax.microedition.lcdui.ItemCommandListener;
 import javax.microedition.lcdui.StringItem;
 
-class TestItem extends CustomItem {
+class DetailItem extends CustomItem {
 	private int width;
 	private int height;
 	private RichText rich;
@@ -31,7 +31,7 @@ class TestItem extends CustomItem {
 	
 	private String test = "test<br/>test<br/>test <b>qweqwe</b>";
 	
-	protected TestItem(String label, int width, String text) {
+	protected DetailItem(String label, int width, String text) {
 		super(label);
 		this.width = width;
 		this.text = text;
@@ -90,7 +90,7 @@ public class Article extends Form implements CommandListener {
 	private void addText(String caption, String data) {
 		//StringItem item = new StringItem(caption, data);
 		//append(item);
-		TestItem t = new TestItem(caption, getWidth(), data);
+		DetailItem t = new DetailItem(caption, getWidth(), data);
 		append(t);
 	}
 	
