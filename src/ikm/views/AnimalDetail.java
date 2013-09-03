@@ -1,5 +1,7 @@
 package ikm.views;
 
+import java.util.Vector;
+
 import ikm.Main;
 import ikm.ViewManager;
 import ikm.data.Animal;
@@ -19,11 +21,24 @@ import javax.microedition.lcdui.StringItem;
 
 class TestItem extends CustomItem {
 	private int width;
+	private int height;
+	private RichText rich;
+	
 	private String text;
+	private Font baseFont = Font.getFont(Font.FONT_STATIC_TEXT);
+	private Font font = Font.getFont(baseFont.getFace(), baseFont.getStyle(), Font.SIZE_SMALL);
+	private Font boldFont = Font.getFont(baseFont.getFace(), Font.STYLE_BOLD, Font.SIZE_SMALL);
+	
+	private String test = "test<br/>test<br/>test <b>qweqwe</b>";
+	
 	protected TestItem(String label, int width, String text) {
 		super(label);
 		this.width = width;
 		this.text = text;
+		//this.text = gen();
+		rich = new RichText(width);
+		//rich.addText("Hello world", boldFont);
+		rich.addFormattedText(text, font, boldFont);
 	}
 
 	protected int getMinContentHeight() {
@@ -34,14 +49,9 @@ class TestItem extends CustomItem {
 		return width;
 	}
 
-	protected int getPrefContentHeight(int width) {
-		RichText rich = new RichText(width, null);
-		
-		Font font = Font.getFont(Font.FONT_STATIC_TEXT);
-		font = Font.getFont(font.getFace(), font.getStyle(), Font.SIZE_SMALL);
-		rich.drawString(text, font);
-		
-		return (rich.getLineCount() + 1) * font.getHeight();
+	protected int getPrefContentHeight(int www) {
+		//System.out.println("Height " + width + " " + (rich.getLineCount() * font.getHeight()));
+		return (rich.getLineCount()) * font.getHeight();
 	}
 
 	protected int getPrefContentWidth(int height) {
@@ -50,17 +60,12 @@ class TestItem extends CustomItem {
 
 	protected void paint(Graphics g, int w, int h) {
 		g.setColor(Main.display.getColor(Display.COLOR_FOREGROUND));
-
-		Font font = Font.getFont(Font.FONT_STATIC_TEXT);
-		font = Font.getFont(font.getFace(), font.getStyle(), Font.SIZE_SMALL);
-		Font boldFont = Font.getFont(font.getFace(), Font.STYLE_BOLD, Font.SIZE_SMALL);
-		RichText rich = new RichText(w, g);
-		g.setFont(font);
-		rich.drawString(text, font);
+		rich.draw(g);
 	}
 	
-	
 	protected void sizeChanged(int w, int h) {
+		width = w;
+		height = h;
 	}
 }
 
@@ -91,6 +96,9 @@ public class AnimalDetail extends Form implements CommandListener {
 	}
 	
 	private void fillDetails() {
+		//TestItem t = new TestItem("test", getWidth(), line[1 + 1]);
+		//append(t);
+		
 		for (int i = 0; i < fieldNames.length; i++) {
 			addText(fieldNames[i], line[i + 1]);
 		}
