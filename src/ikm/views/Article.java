@@ -50,7 +50,6 @@ class TestItem extends CustomItem {
 	}
 
 	protected int getPrefContentHeight(int www) {
-		//System.out.println("Height " + width + " " + (rich.getLineCount() * font.getHeight()));
 		return (rich.getLineCount()) * font.getHeight();
 	}
 
@@ -75,9 +74,9 @@ public class Article extends Form implements CommandListener {
 	private String[] line;
 	private String[] fieldNames;
 	
-	public Article(ViewManager viewManager, String[] line,
+	public Article(String caption, ViewManager viewManager, String[] line,
 			String[] fieldNames) {
-		super("Animal");
+		super(caption);
 		
 		this.viewManager = viewManager;
 		this.line = line;
@@ -99,7 +98,7 @@ public class Article extends Form implements CommandListener {
 		//TestItem t = new TestItem("test", getWidth(), line[1 + 1]);
 		//append(t);
 		
-		for (int i = 0; i < fieldNames.length; i++) {
+		for (int i = 1; i < fieldNames.length; i++) {
 			addText(fieldNames[i], line[i + 1]);
 		}
 	}

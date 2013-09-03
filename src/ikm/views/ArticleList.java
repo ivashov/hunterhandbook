@@ -15,8 +15,8 @@ public class ArticleList extends List implements CommandListener {
 	private Base base;
 	private String[] fieldNames;
 	
-	public ArticleList(ViewManager viewManager, Base base, String[] fieldNames) {
-		super("Animals", List.IMPLICIT);
+	public ArticleList(String name, ViewManager viewManager, Base base, String[] fieldNames) {
+		super(name, List.IMPLICIT);
 		this.viewManager = viewManager;
 		this.base = base;
 		this.fieldNames = fieldNames;
@@ -36,7 +36,7 @@ public class ArticleList extends List implements CommandListener {
 			int idx = getSelectedIndex();
 			if (idx >= 0) {
 				String[] line = base.get(idx);
-				Article detailView = new Article(viewManager, line, fieldNames);
+				Article detailView = new Article(line[1], viewManager, line, fieldNames);
 				viewManager.showView(detailView);
 			}
 		}

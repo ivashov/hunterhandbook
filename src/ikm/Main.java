@@ -58,11 +58,11 @@ public class Main
     	loadBase();
         tabManager = new TabManager(this);
         
-        Displayable view1 = new ArticleList(tabManager, animalBase, new String[] 
+        Displayable view1 = new ArticleList("Животные", tabManager, animalBase, new String[] 
         		{"Название", "Описание", "Категория", "Ареал", "Период охоты", "Способы охоты"});
-        Displayable view2 = new ArticleList(tabManager, documentBase, new String[] 
+        Displayable view2 = new ArticleList("Документы", tabManager, documentBase, new String[] 
         		{"Название", ""});
-        Displayable view3 = new ArticleList(tabManager, weaponBase, new String[] 
+        Displayable view3 = new ArticleList("Оружие", tabManager, weaponBase, new String[] 
         		{"Название", "Тип", "Калибр", "Дальность", "Описание"});
 
         Orientation.addOrientationListener(this);
