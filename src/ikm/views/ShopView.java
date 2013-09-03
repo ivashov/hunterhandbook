@@ -7,14 +7,17 @@ import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Form;
+import javax.microedition.lcdui.Item;
+import javax.microedition.lcdui.ItemCommandListener;
 import javax.microedition.lcdui.StringItem;
 
-public class ShopView extends Form implements CommandListener {
+public class ShopView extends Form implements CommandListener, ItemCommandListener {
 	private ViewManager viewManager;
 	private String[] line;
 	private String[] fieldNames;
 	private Command exitCommand = new Command("Back", Command.BACK, 1);
-	private Command mapCommand = new Command("Показать на карте", Command.SCREEN, 2);
+	private Command mapCommand = new Command("Показать на карте", Command.ITEM, 1);
+	private StringItem showMapItem;
 	private Main main;
 	private int idx;
 	
@@ -27,10 +30,15 @@ public class ShopView extends Form implements CommandListener {
 		this.main = main;
 		this.idx = idx;
 		
+		showMapItem = new StringItem(null, "Показать на карте", StringItem.BUTTON);
+		showMapItem.setDefaultCommand(mapCommand);
+		showMapItem.setItemCommandListener(this);
+		
 		append(new StringItem(fieldNames[1], line[2]));
+		append(showMapItem);
 		
 		addCommand(exitCommand);
-		addCommand(mapCommand);
+		//addCommand(mapCommand);
 		setCommandListener(this);
 	}
 	
@@ -38,6 +46,14 @@ public class ShopView extends Form implements CommandListener {
 		if (c == exitCommand) {
 			viewManager.goBack();
 		} else if (c == mapCommand) {
+			MapView mapView = main.getMapView();
+			mapView.centerOn(idx);
+			viewManager.showView(mapView);
+		}
+	}
+	
+	public void commandAction(Command c, Item item) {
+		if (showMapItem == item) {
 			MapView mapView = main.getMapView();
 			mapView.centerOn(idx);
 			viewManager.showView(mapView);

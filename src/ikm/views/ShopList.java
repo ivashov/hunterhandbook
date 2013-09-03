@@ -8,6 +8,7 @@ import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.List;
+import javax.microedition.lcdui.StringItem;
 
 public class ShopList extends List implements CommandListener {
 	private Command back = new Command("Back", Command.BACK, 1);
