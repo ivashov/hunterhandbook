@@ -3,6 +3,7 @@ package ikm.views;
 import ikm.ViewManager;
 import ikm.db.Base;
 
+import javax.microedition.lcdui.Alert;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;
@@ -34,6 +35,8 @@ public class MapView extends MapCanvas implements CommandListener {
 
 	public void onMapUpdateError(String description, Throwable detail,
 			boolean critical) {
+		Alert alert = new Alert(description);
+		viewManager.showView(alert);
 	}
 
 	public void commandAction(Command c, Displayable d) {
