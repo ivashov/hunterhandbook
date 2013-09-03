@@ -5,7 +5,7 @@ import java.io.UnsupportedEncodingException;
 
 import ikm.data.Animal;
 import ikm.db.Base;
-import ikm.views.AnimalList;
+import ikm.views.ArticleList;
 
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
@@ -58,11 +58,11 @@ public class Main
     	loadBase();
         tabManager = new TabManager(this);
         
-        Displayable view1 = new AnimalList(tabManager, animalBase, new String[] 
+        Displayable view1 = new ArticleList(tabManager, animalBase, new String[] 
         		{"Название", "Описание", "Категория", "Ареал", "Период охоты", "Способы охоты"});
-        Displayable view2 = new AnimalList(tabManager, documentBase, new String[] 
+        Displayable view2 = new ArticleList(tabManager, documentBase, new String[] 
         		{"Название", ""});
-        Displayable view3 = new AnimalList(tabManager, weaponBase, new String[] 
+        Displayable view3 = new ArticleList(tabManager, weaponBase, new String[] 
         		{"Название", "Тип", "Калибр", "Дальность", "Описание"});
 
         Orientation.addOrientationListener(this);

@@ -9,13 +9,13 @@ import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.List;
 
-public class AnimalList extends List implements CommandListener {
+public class ArticleList extends List implements CommandListener {
 	private Command back = new Command("Back", Command.BACK, 1);
 	private ViewManager viewManager;
 	private Base base;
 	private String[] fieldNames;
 	
-	public AnimalList(ViewManager viewManager, Base base, String[] fieldNames) {
+	public ArticleList(ViewManager viewManager, Base base, String[] fieldNames) {
 		super("Animals", List.IMPLICIT);
 		this.viewManager = viewManager;
 		this.base = base;
@@ -36,7 +36,7 @@ public class AnimalList extends List implements CommandListener {
 			int idx = getSelectedIndex();
 			if (idx >= 0) {
 				String[] line = base.get(idx);
-				AnimalDetail detailView = new AnimalDetail(viewManager, line, fieldNames);
+				Article detailView = new Article(viewManager, line, fieldNames);
 				viewManager.showView(detailView);
 			}
 		}

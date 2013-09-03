@@ -69,13 +69,13 @@ class TestItem extends CustomItem {
 	}
 }
 
-public class AnimalDetail extends Form implements CommandListener {	
+public class Article extends Form implements CommandListener {	
 	private ViewManager viewManager;
 	private Command exitCommand = new Command("Back", Command.BACK, 1);
 	private String[] line;
 	private String[] fieldNames;
 	
-	public AnimalDetail(ViewManager viewManager, String[] line,
+	public Article(ViewManager viewManager, String[] line,
 			String[] fieldNames) {
 		super("Animal");
 		

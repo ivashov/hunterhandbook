@@ -40,7 +40,6 @@ public class RichText {
 			for (;remainChars > 0; remainChars--) {
 				char c = text.charAt(p + remainChars - 1);
 				if ((c == ' ' || p + remainChars == text.length()) && approxWidth < width) {
-					//r.drawSubstring(text, p, remainChars, x, y);
 					lines.addElement(text.substring(p, p + remainChars));
 					fonts.addElement(font);
 					p += remainChars;
