@@ -18,13 +18,11 @@ public class ShopList extends List implements CommandListener {
 		"Название",
 		"Адрес"
 	};
-	private Main main;
 	
-	public ShopList(ViewManager viewManager, Base base, Main main) {
+	public ShopList(ViewManager viewManager, Base base) {
 		super("Магазины", List.IMPLICIT);
 		this.base = base;
 		this.viewManager = viewManager;
-		this.main = main;
 		
 		addCommand(back);
 		setCommandListener(this);
@@ -41,7 +39,7 @@ public class ShopList extends List implements CommandListener {
 			int idx = getSelectedIndex();
 			if (idx >= 0) {
 				String[] line = base.get(idx);
-				ShopView detailView = new ShopView(line[1], viewManager, line, fieldNames, main, idx);
+				ShopView detailView = new ShopView(line[1], viewManager, line, fieldNames, idx);
 				viewManager.showView(detailView);
 			}
 		}

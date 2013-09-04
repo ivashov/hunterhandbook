@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import ikm.data.Animal;
 import ikm.db.Base;
 import ikm.views.ArticleList;
+import ikm.views.MainMenu;
 import ikm.views.MapView;
 import ikm.views.ShopList;
 
@@ -38,11 +39,19 @@ public class Main
 	public static final String HERE_ID = "aISaf4OOdEYcioK0pEJs";
 	public static final String HERE_TOKEN = "sLOZJSIl6hfCid2LZ_BAug";
     private TabManager tabManager;
-    private Base animalBase;
-    private Base documentBase;
-    private Base weaponBase;
-    private Base shopBase;
+    public Base animalBase;
+    public Base documentBase;
+    public Base weaponBase;
+    public Base shopBase;
     public static Display display;
+    
+    private static Main instance;
+    {
+    	instance = this;
+    }
+    public static Main getInstance() {
+    	return instance;
+    }
     
     private volatile MapView mapView;
     public MapView getMapView() {
@@ -93,13 +102,8 @@ public class Main
     	loadBase();
         tabManager = new TabManager(this);
 
-        Displayable view1 = new ArticleList("Животные", tabManager, animalBase, new String[] 
-        		{"Название", "Описание", "Категория", "Ареал", "Период охоты", "Способы охоты"});
-        Displayable view2 = new ArticleList("Документы", tabManager, documentBase, new String[] 
-        		{"Название", ""});
-        Displayable view3 = new ArticleList("Оружие", tabManager, weaponBase, new String[] 
-        		{"Название", "Тип", "Калибр", "Дальность", "Описание"});
-        Displayable view4 = new ShopList(tabManager, shopBase, this);
+        Displayable view1 = new MainMenu(tabManager);
+        Displayable view2 = getMapView();
         /*
         MapCanvas mapp = new MapCanvas(display) {
 			public void onMapUpdateError(String arg0, Throwable arg1, boolean arg2) {
@@ -118,11 +122,8 @@ public class Main
 		
         Orientation.addOrientationListener(this);
 
-        tabManager.addTab(view1, "/categorybar_comments.png",
-            "Custom command label");
-        tabManager.addTab(view2, "/categorybar_contacts.png");
-        tabManager.addTab(view3, "/categorybar_image.png");
-        tabManager.addTab(view4, "/categorybar_image.png");
+        tabManager.addTab(view1, "/categorybar_comments.png", "Label");
+        tabManager.addTab(view2, "/1378301421_monotone_earth_world_asia_transparent.png", "Label");
         tabManager.showTab(0); // 0 == first tab
     }
 
@@ -157,5 +158,9 @@ public class Main
         {
             Orientation.setAppOrientation(newDisplayOrientation);
         }
+    }
+    
+    public void showMap() {
+    	tabManager.showTab(1);
     }
 }

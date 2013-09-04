@@ -26,7 +26,7 @@ public class MapView extends MapCanvas implements CommandListener {
 		this.viewManager = viewManager;
 		this.base = base;
 		generateMarkers();
-		setFullScreenMode(true);
+		setFullScreenMode(false);
 		
 		setCommandListener(this);
 		addCommand(back);
@@ -38,7 +38,7 @@ public class MapView extends MapCanvas implements CommandListener {
 	public void onMapUpdateError(String description, Throwable detail,
 			boolean critical) {
 		Alert alert = new Alert("Error", description, null, AlertType.ERROR);
-		viewManager.goBack();
+		alert.setTimeout(1000);
 		viewManager.showView(alert);
 	}
 

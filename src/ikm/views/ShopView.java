@@ -19,16 +19,15 @@ public class ShopView extends Form implements CommandListener, ItemCommandListen
 	private Command exitCommand = new Command("Back", Command.BACK, 1);
 	private Command mapCommand = new Command("Показать на карте", Command.ITEM, 1);
 	private StringItem showMapItem;
-	private Main main;
+	private Main main = Main.getInstance();
 	private int idx;
 	
 	public ShopView(String caption, ViewManager viewManager, String[] line,
-			String[] fieldNames, Main main, int idx) {
+			String[] fieldNames, int idx) {
 		super(caption);
 		this.viewManager = viewManager;
 		this.line = line;
 		this.fieldNames = fieldNames;
-		this.main = main;
 		this.idx = idx;
 		
 		showMapItem = new StringItem(null, "Показать на карте", StringItem.BUTTON);
@@ -49,7 +48,7 @@ public class ShopView extends Form implements CommandListener, ItemCommandListen
 		} else if (c == mapCommand) {
 			MapView mapView = main.getMapView();
 			mapView.centerOn(idx);
-			viewManager.showView(mapView);
+			main.showMap();
 		}
 	}
 	
@@ -57,7 +56,9 @@ public class ShopView extends Form implements CommandListener, ItemCommandListen
 		if (showMapItem == item) {
 			MapView mapView = main.getMapView();
 			mapView.centerOn(idx);
-			viewManager.showView(mapView);
+	    	viewManager.goBack();
+	    	viewManager.goBack();
+			main.showMap();
 		}
 	}
 }
