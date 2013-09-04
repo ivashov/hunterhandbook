@@ -30,7 +30,7 @@ public class TabManager
     protected Vector iconCommands = new Vector();
     protected Vector tabStacks = new Vector();
 
-    {
+    /*{
     	new Thread() {
     		public void run() {
     			for (;;) {
@@ -46,7 +46,7 @@ public class TabManager
     			}
     		};
     	}.start();
-    }
+    }*/
     /**
      * Class constructor. Just saves the application MIDlet as a member, so that
      * actual view changes can be directed to MIDlet's Display.

@@ -122,8 +122,8 @@ public class Main
 		
         Orientation.addOrientationListener(this);
 
-        tabManager.addTab(view1, "/categorybar_comments.png", "Label");
-        tabManager.addTab(view2, "/1378301421_monotone_earth_world_asia_transparent.png", "Label");
+        tabManager.addTab(view1, "/categorybar_list_m_light.png", "Menu");
+        tabManager.addTab(view2, "/1378301421_monotone_earth_world_asia_transparent.png", "Map");
         tabManager.showTab(0); // 0 == first tab
     }
 

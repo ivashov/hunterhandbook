@@ -2,6 +2,7 @@ package ikm.views;
 
 import java.util.Vector;
 
+import ikm.ImageManager;
 import ikm.Main;
 import ikm.ViewManager;
 import ikm.data.Animal;
@@ -15,6 +16,8 @@ import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.Image;
+import javax.microedition.lcdui.ImageItem;
 import javax.microedition.lcdui.Item;
 import javax.microedition.lcdui.ItemCommandListener;
 import javax.microedition.lcdui.StringItem;
@@ -80,11 +83,15 @@ public class Article extends Form implements CommandListener {
 	private Command exitCommand = new Command("Back", Command.BACK, 1);
 	private String[] line;
 	private String[] fieldNames;
+	private int firstField;
+	private int imageField;
 	
 	public Article(String caption, ViewManager viewManager, String[] line,
-			String[] fieldNames) {
+			String[] fieldNames, int firstField, int imageField) {
 		super(caption);
 		
+		this.imageField = imageField;
+		this.firstField = firstField;
 		this.viewManager = viewManager;
 		this.line = line;
 		this.fieldNames = fieldNames;
@@ -105,8 +112,19 @@ public class Article extends Form implements CommandListener {
 		//TestItem t = new TestItem("test", getWidth(), line[1 + 1]);
 		//append(t);
 		
-		for (int i = 1; i < fieldNames.length; i++) {
-			addText(fieldNames[i], line[i + 1]);
+		if (imageField >= 0) {
+			String imgFile = line[imageField];
+			if (imgFile != null) {
+				Image img = ImageManager.getImage(imgFile);
+				if (img != null) {
+					ImageItem imgItem = new ImageItem(null, img, ImageItem.LAYOUT_CENTER, imgFile);
+					append(imgItem);
+				}
+			}
+		}
+		
+		for (int i = 0; i < fieldNames.length; i++) {
+			addText(fieldNames[i], line[i + firstField]);
 		}
 	}
 

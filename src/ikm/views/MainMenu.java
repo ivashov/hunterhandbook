@@ -24,11 +24,11 @@ public class MainMenu extends List implements CommandListener {
 		this.viewManager = viewManager;
 		Main main = Main.getInstance();
 	    view1 = new ArticleList("Животные", viewManager, main.animalBase, new String[] 
-	    		{"Название", "Описание", "Категория", "Ареал", "Период охоты", "Способы охоты"});
+	    		{"Описание", "Категория", "Ареал", "Период охоты", "Способы охоты"}, 3, 2);
 	    view2 = new ArticleList("Документы", viewManager, main.documentBase, new String[] 
-	    		{"Название", ""});
+	    		{""}, 2, -1);
 	    view3 = new ArticleList("Оружие", viewManager, main.weaponBase, new String[] 
-	    		{"Название", "Тип", "Калибр", "Дальность", "Описание"});
+	    		{"Тип", "Калибр", "Дальность", "Описание"}, 2, -1);
 	    view4 = new ShopList(viewManager, main.shopBase);
 	    
 	    append("Животные", null);
