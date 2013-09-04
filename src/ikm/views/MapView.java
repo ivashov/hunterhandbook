@@ -16,7 +16,7 @@ import com.nokia.maps.map.MapDisplayState;
 import com.nokia.maps.map.MapStandardMarker;
 
 public class MapView extends MapCanvas implements CommandListener {
-	private Command back = new Command("Back", Command.BACK, 1);
+	private Command back = new Command("Back", Command.BACK, 0);
 	private ViewManager viewManager;
 	private Base base;
 	private MapDisplayState[] states;
@@ -26,9 +26,10 @@ public class MapView extends MapCanvas implements CommandListener {
 		this.viewManager = viewManager;
 		this.base = base;
 		generateMarkers();
+		setFullScreenMode(true);
 		
-		addCommand(back);
 		setCommandListener(this);
+		addCommand(back);
 	}
 
 	public void onMapContentComplete() {
@@ -37,6 +38,7 @@ public class MapView extends MapCanvas implements CommandListener {
 	public void onMapUpdateError(String description, Throwable detail,
 			boolean critical) {
 		Alert alert = new Alert("Error", description, null, AlertType.ERROR);
+		viewManager.goBack();
 		viewManager.showView(alert);
 	}
 

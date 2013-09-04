@@ -92,7 +92,7 @@ public class Main
     	display = Display.getDisplay(this);
     	loadBase();
         tabManager = new TabManager(this);
-        
+
         Displayable view1 = new ArticleList("Животные", tabManager, animalBase, new String[] 
         		{"Название", "Описание", "Категория", "Ареал", "Период охоты", "Способы охоты"});
         Displayable view2 = new ArticleList("Документы", tabManager, documentBase, new String[] 
@@ -115,7 +115,6 @@ public class Main
 				new GeoCoordinate(61.78, 34.35, 0));
 		mapp.getMapDisplay().addMapObject(mar);
 		*/
-		
 		
         Orientation.addOrientationListener(this);
 
