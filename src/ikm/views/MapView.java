@@ -28,6 +28,7 @@ public class MapView extends MapCanvas implements CommandListener {
 		generateMarkers();
 		setFullScreenMode(false);
 		
+		
 		setCommandListener(this);
 		addCommand(back);
 	}
@@ -54,8 +55,8 @@ public class MapView extends MapCanvas implements CommandListener {
 			String lat = base.get(i, 3);
 			String lon = base.get(i, 4);
 			GeoCoordinate coord = new GeoCoordinate(Double.parseDouble(lat), Double.parseDouble(lon), 0);
-			states[i] = new MapDisplayState(coord, 10);
-			MapStandardMarker marker = getMapFactory().createStandardMarker(coord);
+			states[i] = new MapDisplayState(coord, 15);
+			MapStandardMarker marker = getMapFactory().createStandardMarker(coord, 8, "", MapStandardMarker.BALLOON);
 			getMapDisplay().addMapObject(marker);
 		}
 	}

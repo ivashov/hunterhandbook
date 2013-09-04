@@ -43,6 +43,7 @@ public class Main
     public Base documentBase;
     public Base weaponBase;
     public Base shopBase;
+    public Base lawBase;
     public static Display display;
     
     private static Main instance;
@@ -81,6 +82,9 @@ public class Main
     		shopBase = new Base(reader = new InputStreamReader(Main.class.getResourceAsStream("/shops.csv"), "utf-8"));
     		shopBase.parseAll();
     		reader.close();
+    		lawBase = new Base(reader = new InputStreamReader(Main.class.getResourceAsStream("/law.csv"), "utf-8"));
+    		lawBase.parseAll();
+    		reader.close();
     	} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -97,7 +101,7 @@ public class Main
     public void startApp() {
     	com.nokia.maps.common.ApplicationContext.getInstance().setAppID(HERE_ID);
     	com.nokia.maps.common.ApplicationContext.getInstance().setToken(HERE_TOKEN);
-    	
+    	com.nokia.maps.common.ApplicationContext.getInstance().setDefaultLanguage("RUS");
     	display = Display.getDisplay(this);
     	loadBase();
         tabManager = new TabManager(this);
