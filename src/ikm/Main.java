@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 
 import ikm.data.Animal;
 import ikm.db.Base;
+import ikm.util.Maths;
 import ikm.views.ArticleList;
 import ikm.views.MainMenu;
 import ikm.views.MapView;
@@ -70,6 +71,7 @@ public class Main
     private void loadBase() {
     	try {
     		InputStreamReader reader;
+    		
     		animalBase = new Base(reader = new InputStreamReader(Main.class.getResourceAsStream("/animal.csv"), "utf-8"));
     		animalBase.parseAll();
     		reader.close();

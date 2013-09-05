@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
+import javax.microedition.lcdui.Image;
 
 interface Renderer {
 	void drawSubstring(String str, int from, int length, int x, int y);
@@ -103,7 +104,7 @@ public class RichText {
 	
 	public void draw(Graphics g) {
 		int y = 0;
-
+		
 		int i = 0;
 		for (Enumeration en = lines.elements(); en.hasMoreElements();) {
 			Font font = (Font) fonts.elementAt(i++);
