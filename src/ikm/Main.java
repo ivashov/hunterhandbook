@@ -59,8 +59,8 @@ public class Main
     	
     	return mapView;
     }
-    
-    /*{
+    /*
+    {
     	new Thread() {
     		public void run() {
     			while (true) {
@@ -69,13 +69,13 @@ public class Main
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-    				
+    				System.gc();
     				System.out.println("" + (Runtime.getRuntime().freeMemory() / 1024) + "/" + (Runtime.getRuntime().totalMemory() /  1024));
     			}
     		}
     	}.start();
-    }*/
-    
+    }
+    */
     private void loadBase() {
     	try {
     		InputStreamReader reader;

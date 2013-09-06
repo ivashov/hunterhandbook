@@ -45,6 +45,8 @@ public class FormCanvas extends GameCanvas implements GestureListener, FrameAnim
 	
 	private Vector items = new Vector();
 	
+	private boolean registered = false;
+	
 	public FormCanvas(String caption) {
 		super(true);
 		setTitle(caption);
@@ -57,9 +59,7 @@ public class FormCanvas extends GameCanvas implements GestureListener, FrameAnim
 		giz = new GestureInteractiveZone(GESTURES);
 		frame = new FrameAnimator();
 		GestureRegistrationManager.register(this, giz);
-		GestureRegistrationManager.setListener(this, this);
-		
-		frame.register(0, 0, (short) 0, (short) 0, this);
+
 		redraw();
 	}
 	
@@ -90,6 +90,9 @@ public class FormCanvas extends GameCanvas implements GestureListener, FrameAnim
 
 	public void animate(FrameAnimator animator, int x, int y, short delta,
 			short deltaX, short deltaY, boolean lastFrame) {
+		if (!registered)
+			return;
+
 		canvasTranslation = y;
 		if (y < 0) {
 			frame.stop();
@@ -105,9 +108,9 @@ public class FormCanvas extends GameCanvas implements GestureListener, FrameAnim
 	public void gestureAction(Object container,
 			GestureInteractiveZone gestureInteractiveZone,
 			GestureEvent gestureEvent) {
-		if (totalHeight <= cheight) {
+		if (totalHeight <= cheight || !registered)
 			return;
-		}
+
 		switch (gestureEvent.getType()) {
 		case GestureInteractiveZone.GESTURE_DRAG:
 			dragY += gestureEvent.getDragDistanceY();
@@ -129,5 +132,20 @@ public class FormCanvas extends GameCanvas implements GestureListener, FrameAnim
 		width = cwidth = w;
 		height = cheight = h;
 		redraw();
+	}
+
+	protected void showNotify() {
+		if (!registered) {
+			frame.register(0, 0, (short) 0, (short) 0, this);
+			GestureRegistrationManager.setListener(this, this);
+			registered = true;
+		}
+	}
+
+	protected void hideNotify() {
+		if (registered) {
+			registered = false;
+			frame.unregister();
+		}
 	}
 }
