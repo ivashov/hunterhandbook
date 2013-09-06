@@ -118,7 +118,7 @@ public class Main
 
         Displayable view1 = new MainMenu(tabManager);
         Displayable view2 = getMapView();
-        Displayable view3 = new Article2();
+       // Displayable view3 = new Article2();
         /*
         MapCanvas mapp = new MapCanvas(display) {
 			public void onMapUpdateError(String arg0, Throwable arg1, boolean arg2) {
@@ -139,7 +139,7 @@ public class Main
 
         tabManager.addTab(view1, "/categorybar_list_m_light.png", "Menu");
         tabManager.addTab(view2, "/1378301421_monotone_earth_world_asia_transparent.png", "Map");
-        tabManager.addTab(view3, "/categorybar_list_m_light.png", "Menu");
+        //tabManager.addTab(view3, "/categorybar_list_m_light.png", "Menu");
         tabManager.showTab(0); // 0 == first tab
     }
 

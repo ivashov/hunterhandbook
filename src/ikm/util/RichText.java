@@ -1,6 +1,7 @@
 package ikm.util;
 
 import java.util.Enumeration;
+import java.util.Random;
 import java.util.Vector;
 
 import javax.microedition.lcdui.Font;
@@ -44,8 +45,9 @@ public class RichText {
 				char c = text.charAt(p + remainChars - 1);
 				if ((c == ' ' || p + remainChars == text.length()) && approxWidth < width) {
 					lines.addElement(text.substring(p, p + remainChars));
-					height += font.getHeight();
 					fonts.addElement(font);
+					height += font.getHeight();
+					
 					p += remainChars;
 					break;
 				}
@@ -115,16 +117,16 @@ public class RichText {
 			y += font.getHeight();
 		}
 	}
-	
+
 	public void draw(Graphics g, int fromY, int toY) {
 		int y = 0;
 		int i = 0;
+		
 		for (Enumeration en = lines.elements(); en.hasMoreElements();) {
 			Font font = (Font) fonts.elementAt(i++);
 			String str = (String) en.nextElement();
-			
 			int fontHeight = font.getHeight();
-			if (y >= fromY && y + fontHeight <= toY) {
+			if (y + fontHeight >= fromY && y <= toY) {
 				g.setFont(font);
 				g.drawString(str, 0, y, Graphics.TOP | Graphics.LEFT);
 			}

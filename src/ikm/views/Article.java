@@ -4,6 +4,9 @@ import ikm.ImageManager;
 import ikm.Main;
 import ikm.ViewManager;
 import ikm.util.RichText;
+import ikm.views.formcanvas.FormCanvas;
+import ikm.views.formcanvas.ImageItem;
+import ikm.views.formcanvas.TextItem;
 
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
@@ -14,7 +17,6 @@ import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
-import javax.microedition.lcdui.ImageItem;
 
 class DetailItem extends CustomItem {
 	private int width;
@@ -86,7 +88,7 @@ class DetailItem extends CustomItem {
 	}
 }
 
-public class Article extends Form implements CommandListener {	
+public class Article extends FormCanvas implements CommandListener {	
 	private ViewManager viewManager;
 	private Command exitCommand = new Command("Back", Command.BACK, 1);
 	private String[] line;
@@ -107,26 +109,22 @@ public class Article extends Form implements CommandListener {
 		setCommandListener(this);
 		
 		fillDetails();
+		redraw();
 	}
 
 	private void addText(String caption, String data) {
-		//StringItem item = new StringItem(caption, data);
-		//append(item);
-		DetailItem t = new DetailItem(caption, getWidth(), data);
-		append(t);
+		TextItem textItem = new TextItem(/*caption, getWidth(), */caption, data);
+		addItem(textItem);
 	}
 	
-	private void fillDetails() {
-		//TestItem t = new TestItem("test", getWidth(), line[1 + 1]);
-		//append(t);
-		
+	private void fillDetails() {		
 		if (imageField >= 0) {
 			String imgFile = line[imageField];
 			if (imgFile != null) {
 				Image img = ImageManager.getImage(imgFile);
 				if (img != null) {
-					ImageItem imgItem = new ImageItem(null, img, ImageItem.LAYOUT_CENTER, imgFile);
-					append(imgItem);
+					ImageItem imgItem = new ImageItem(img);
+					addItem(imgItem);
 				}
 			}
 		}
