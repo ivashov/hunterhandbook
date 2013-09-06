@@ -4,18 +4,12 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
 import ikm.db.Base;
-import ikm.views.Article2;
 import ikm.views.MainMenu;
 import ikm.views.MapView;
-import ikm.views.formcanvas.FormCanvas;
 
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.midlet.MIDlet;
-
-import com.nokia.mid.ui.orientation.Orientation;
-import com.nokia.mid.ui.orientation.OrientationListener;
-
 
 /**
  * This is the main MIDlet of the template. It handles MIDlet life cycle
@@ -24,8 +18,7 @@ import com.nokia.mid.ui.orientation.OrientationListener;
  * try to clearly separate responsibilities to own classes.
  */
 public class Main
-    extends MIDlet 
-    implements OrientationListener {
+    extends MIDlet {
 
     // Class members
 
@@ -134,8 +127,6 @@ public class Main
 				new GeoCoordinate(61.78, 34.35, 0));
 		mapp.getMapDisplay().addMapObject(mar);
 		*/
-		
-        Orientation.addOrientationListener(this);
 
         tabManager.addTab(view1, "/categorybar_list_m_light.png", "Menu");
         tabManager.addTab(view2, "/1378301421_monotone_earth_world_asia_transparent.png", "Map");
@@ -161,20 +152,6 @@ public class Main
     public void destroyApp(boolean unconditional) {
     }
 
-    /**
-     * Changes display orientation between landscape and portrait.
-     * Note: ORIENTATION_LANDSCAPE_180 and ORIENTATION_PORTRAIT_180 are not
-     * supported.
-     * @param newDisplayOrientation Tells the new device orientation.
-     * @see com.nokia.mid.ui.orientation.OrientationListener#displayOrientationChanged(int)
-     */
-    public void displayOrientationChanged(int newDisplayOrientation) {
-        if (newDisplayOrientation == Orientation.ORIENTATION_LANDSCAPE
-            || newDisplayOrientation == Orientation.ORIENTATION_PORTRAIT)
-        {
-            Orientation.setAppOrientation(newDisplayOrientation);
-        }
-    }
     
     public void showMap() {
     	tabManager.showTab(1);
