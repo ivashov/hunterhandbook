@@ -35,7 +35,7 @@ public class MainMenu extends List implements CommandListener {
 	    addMenuItem("Оружие", new ArticleList("Оружие", viewManager, main.weaponBase, new String[] 
 	    		{"Тип", "Калибр", "Дальность", "Описание"}, 2, -1));
 	    addMenuItem("Магазины", new ShopList(viewManager, main.shopBase));
-	    
+	    addMenuItem("О программе", new AboutView(viewManager));
 	    setCommandListener(this);
 	    addCommand(back);
 	}
