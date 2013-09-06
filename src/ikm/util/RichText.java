@@ -103,6 +103,7 @@ public class RichText {
 	}
 	
 	public void draw(Graphics g) {
+		long time = System.currentTimeMillis();
 		int y = 0;
 		
 		int i = 0;
@@ -112,6 +113,8 @@ public class RichText {
 			g.drawString((String) en.nextElement(), 0, y, Graphics.TOP | Graphics.LEFT);
 			y += font.getHeight();
 		}
+		
+		System.out.println(System.currentTimeMillis() - time);
 	}
 	
 	public int getLineCount() {

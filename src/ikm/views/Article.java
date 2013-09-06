@@ -1,13 +1,8 @@
 package ikm.views;
 
-import java.util.Random;
-import java.util.Vector;
-
 import ikm.ImageManager;
 import ikm.Main;
 import ikm.ViewManager;
-import ikm.data.Animal;
-import ikm.util.Maths;
 import ikm.util.RichText;
 
 import javax.microedition.lcdui.Command;
@@ -20,13 +15,6 @@ import javax.microedition.lcdui.Form;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 import javax.microedition.lcdui.ImageItem;
-import javax.microedition.lcdui.Item;
-import javax.microedition.lcdui.ItemCommandListener;
-import javax.microedition.lcdui.StringItem;
-import javax.microedition.m3g.Graphics3D;
-
-import com.nokia.mid.ui.DirectGraphics;
-import com.nokia.mid.ui.DirectUtils;
 
 class DetailItem extends CustomItem {
 	private int width;
@@ -74,7 +62,7 @@ class DetailItem extends CustomItem {
 	}
 
 	protected void paint(Graphics g, int w, int h) {
-		if (renderedWidth != width) {
+		/*if (renderedWidth != width) {
 			renderedImage = DirectUtils.createImage(width, height, Main.display.getColor(Display.COLOR_FOREGROUND));
 			
 			Graphics gg = renderedImage.getGraphics();			
@@ -85,7 +73,10 @@ class DetailItem extends CustomItem {
 			
 			renderedWidth = width;
 		}
-		g.drawImage(renderedImage, 0, 0, Graphics.TOP | Graphics.LEFT);
+		g.drawImage(renderedImage, 0, 0, Graphics.TOP | Graphics.LEFT);*/
+		generateText();
+		g.setColor(Main.display.getColor(Display.COLOR_FOREGROUND));
+		rich.draw(g);
 	}
 	
 	protected void sizeChanged(int w, int h) {

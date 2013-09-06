@@ -3,24 +3,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
-import ikm.data.Animal;
 import ikm.db.Base;
-import ikm.util.Maths;
-import ikm.views.ArticleList;
 import ikm.views.MainMenu;
 import ikm.views.MapView;
-import ikm.views.ShopList;
+import ikm.views.TextCanvas;
 
-import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.midlet.MIDlet;
 
-import com.nokia.maps.common.GeoCoordinate;
-import com.nokia.maps.map.MapCanvas;
-import com.nokia.maps.map.MapDisplayState;
-import com.nokia.maps.map.MapMarker;
-import com.nokia.maps.map.MapStandardMarker;
 import com.nokia.mid.ui.orientation.Orientation;
 import com.nokia.mid.ui.orientation.OrientationListener;
 
@@ -68,6 +59,22 @@ public class Main
     	return mapView;
     }
     
+    /*{
+    	new Thread() {
+    		public void run() {
+    			while (true) {
+    				try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+    				
+    				System.out.println("" + (Runtime.getRuntime().freeMemory() / 1024) + "/" + (Runtime.getRuntime().totalMemory() /  1024));
+    			}
+    		}
+    	}.start();
+    }*/
+    
     private void loadBase() {
     	try {
     		InputStreamReader reader;
@@ -110,6 +117,7 @@ public class Main
 
         Displayable view1 = new MainMenu(tabManager);
         Displayable view2 = getMapView();
+        Displayable view3 = new TextCanvas();
         /*
         MapCanvas mapp = new MapCanvas(display) {
 			public void onMapUpdateError(String arg0, Throwable arg1, boolean arg2) {
@@ -130,6 +138,7 @@ public class Main
 
         tabManager.addTab(view1, "/categorybar_list_m_light.png", "Menu");
         tabManager.addTab(view2, "/1378301421_monotone_earth_world_asia_transparent.png", "Map");
+        tabManager.addTab(view3, "/categorybar_list_m_light.png", "Menu");
         tabManager.showTab(0); // 0 == first tab
     }
 

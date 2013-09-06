@@ -13,7 +13,7 @@ import javax.microedition.lcdui.List;
 public class MainMenu extends List implements CommandListener {
 	private ViewManager viewManager;
 	private Command back = new Command("Back", Command.BACK, 0);
-	private Vector menuItems = new Vector(4);
+	private Vector menuItems = new Vector(5);
 	
 	private void addMenuItem(String caption, Displayable disp) {
 		append(caption, null);
