@@ -4,9 +4,10 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
 import ikm.db.Base;
+import ikm.views.Article2;
 import ikm.views.MainMenu;
 import ikm.views.MapView;
-import ikm.views.TextCanvas;
+import ikm.views.formcanvas.FormCanvas;
 
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
@@ -117,7 +118,7 @@ public class Main
 
         Displayable view1 = new MainMenu(tabManager);
         Displayable view2 = getMapView();
-        Displayable view3 = new TextCanvas();
+        Displayable view3 = new Article2();
         /*
         MapCanvas mapp = new MapCanvas(display) {
 			public void onMapUpdateError(String arg0, Throwable arg1, boolean arg2) {

@@ -13,6 +13,7 @@ interface Renderer {
 
 public class RichText {
 	private int width;
+	private int height = 0;
 	private Vector lines = new Vector();
 	private Vector fonts = new Vector();
 	
@@ -28,6 +29,7 @@ public class RichText {
 		if (text.length() == 0) {
 			lines.addElement("");
 			fonts.addElement(font);
+			height += font.getHeight();
 			return;
 		}
 		
@@ -42,6 +44,7 @@ public class RichText {
 				char c = text.charAt(p + remainChars - 1);
 				if ((c == ' ' || p + remainChars == text.length()) && approxWidth < width) {
 					lines.addElement(text.substring(p, p + remainChars));
+					height += font.getHeight();
 					fonts.addElement(font);
 					p += remainChars;
 					break;
@@ -103,9 +106,7 @@ public class RichText {
 	}
 	
 	public void draw(Graphics g) {
-		long time = System.currentTimeMillis();
 		int y = 0;
-		
 		int i = 0;
 		for (Enumeration en = lines.elements(); en.hasMoreElements();) {
 			Font font = (Font) fonts.elementAt(i++);
@@ -113,11 +114,29 @@ public class RichText {
 			g.drawString((String) en.nextElement(), 0, y, Graphics.TOP | Graphics.LEFT);
 			y += font.getHeight();
 		}
-		
-		System.out.println(System.currentTimeMillis() - time);
+	}
+	
+	public void draw(Graphics g, int fromY, int toY) {
+		int y = 0;
+		int i = 0;
+		for (Enumeration en = lines.elements(); en.hasMoreElements();) {
+			Font font = (Font) fonts.elementAt(i++);
+			String str = (String) en.nextElement();
+			
+			int fontHeight = font.getHeight();
+			if (y >= fromY && y + fontHeight <= toY) {
+				g.setFont(font);
+				g.drawString(str, 0, y, Graphics.TOP | Graphics.LEFT);
+			}
+			y += fontHeight;
+		}
 	}
 	
 	public int getLineCount() {
 		return lines.size();
+	}
+	
+	public int getHeight() {
+		return height;
 	}
 }
