@@ -1,5 +1,5 @@
 /* 
- * This file is part of Ecotamagochi.
+ * This file is part of Hunterhandbook.
  * Copyright (C) 2013, Ivashov Kirill
  *
  * This program is free software: you can redistribute it and/or modify
@@ -15,7 +15,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 package ikm.util;
 
 import java.util.Random;

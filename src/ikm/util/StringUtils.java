@@ -1,5 +1,5 @@
 /* 
- * This file is part of Ecotamagochi.
+ * This file is part of Hunterhandbook.
  * Copyright (C) 2013, Ivashov Kirill
  *
  * This program is free software: you can redistribute it and/or modify
