@@ -21,7 +21,7 @@ public class MainMenu extends List implements CommandListener {
 	}
 	
 	public MainMenu(ViewManager viewManager) {
-		super("Menu", List.IMPLICIT);
+		super("Μενώ", List.IMPLICIT);
 		
 		this.viewManager = viewManager;
 		Main main = Main.getInstance();
