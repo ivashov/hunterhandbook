@@ -39,6 +39,8 @@ public class AboutView extends Form implements CommandListener {
 		add("E-Mail: ivashov@cs.karelia.ru");
 		add("В приложении использованы материалы с commons.wikimedia.org");
 
+		//add("This application is a part of grant KA322 of Karelia ENPI CBC programme, which is co-funded by the European Union, the Russian Federation and the Republic of Finland");
+		add("Приложение является частью гранта KA322 Karelia ENPI CBC programme, который финансируется Европейским Союзом, Российской Федерацией и Финляндией");
 		setCommandListener(this);
 		addCommand(back);
 	}

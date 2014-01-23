@@ -28,6 +28,7 @@ import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 
+import com.nokia.maps.common.ConnectionListener;
 import com.nokia.maps.common.GeoCoordinate;
 import com.nokia.maps.map.MapCanvas;
 import com.nokia.maps.map.MapDisplayState;
@@ -46,7 +47,6 @@ public class MapView extends MapCanvas implements CommandListener {
 		generateMarkers();
 		setFullScreenMode(false);
 		
-		
 		setCommandListener(this);
 		addCommand(back);
 	}
@@ -56,7 +56,9 @@ public class MapView extends MapCanvas implements CommandListener {
 
 	public void onMapUpdateError(String description, Throwable detail,
 			boolean critical) {
-		Alert alert = new Alert("Error", description, null, AlertType.ERROR);
+		Alert alert = new Alert((critical ? "Critical error" : "Error"), description, null, AlertType.ERROR);
+		detail.printStackTrace();
+		
 		alert.setTimeout(1000);
 		viewManager.showView(alert);
 	}

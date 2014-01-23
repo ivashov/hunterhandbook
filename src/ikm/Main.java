@@ -25,6 +25,8 @@ import ikm.db.Base;
 import ikm.views.MainMenu;
 import ikm.views.MapView;
 
+import javax.microedition.io.Connector;
+import javax.microedition.io.HttpConnection;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.midlet.MIDlet;
@@ -144,7 +146,7 @@ public class Main
 		MapStandardMarker mar = mapp.getMapFactory().createStandardMarker(
 				new GeoCoordinate(61.78, 34.35, 0));
 		mapp.getMapDisplay().addMapObject(mar);
-		*/
+		*/        
 
         tabManager.addTab(view1, "/categorybar_list_m_light.png", "Menu");
         tabManager.addTab(view2, "/1378301421_monotone_earth_world_asia_transparent.png", "Map");
