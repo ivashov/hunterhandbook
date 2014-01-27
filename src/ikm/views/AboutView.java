@@ -35,7 +35,7 @@ public class AboutView extends Form implements CommandListener {
 		this.viewManager = viewManager;
 		add("Приложение реализовано в лаборатории ПетрГУ Fruct");
 		add("Разработчик: Kirill Ivashov");
-		add("Версия: 0.0.1");
+		add("Версия: 0.0.2");
 		add("E-Mail: ivashov@cs.karelia.ru");
 		add("В приложении использованы материалы с commons.wikimedia.org");
 
